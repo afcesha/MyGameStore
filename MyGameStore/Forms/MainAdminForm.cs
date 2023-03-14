@@ -17,6 +17,9 @@ namespace MyGameStore.Forms
             InitializeComponent();
         }
 
+
+        public string CurrTable;
+
         private void MainAdminForm_Load(object sender, EventArgs e)
         {
             connection = new Classes.Connection();
@@ -32,7 +35,10 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "client";
         }
+
+
 
         private void selectProduct_Click(object sender, EventArgs e)
         {
@@ -43,6 +49,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "product";
         }
 
         private void selectActivationService_Click(object sender, EventArgs e)
@@ -54,6 +61,8 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "as";
+
         }
 
         private void selectDeliveryService_Click(object sender, EventArgs e)
@@ -65,6 +74,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "ds";
         }
 
         private void selectDelivery_Click(object sender, EventArgs e)
@@ -76,6 +86,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "delivery";
         }
 
         private void selectOrder_Click(object sender, EventArgs e)
@@ -87,6 +98,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "order";
         }
 
         private void selectOrderDetails_Click(object sender, EventArgs e)
@@ -98,6 +110,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "od";
         }
 
         private void selectSupplier_Click(object sender, EventArgs e)
@@ -109,6 +122,26 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            CurrTable = "supplier";
+        }
+
+        private void addClient_Click(object sender, EventArgs e)
+        {
+            Classes.QueryPatterns queryPatterns;
+            queryPatterns = new Classes.QueryPatterns();
+            queryPatterns.insertClient();
+        }
+
+        private void deleteClient_Click(object sender, EventArgs e)
+        {
+            Classes.QueryPatterns queryPatterns;
+            queryPatterns = new Classes.QueryPatterns();
+            queryPatterns.deleteClient();
+        }
+
+        private void updateClient_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(dataGridView1.CurrentRow.Cells[0].Value.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
