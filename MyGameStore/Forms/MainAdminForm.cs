@@ -35,7 +35,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "client";
+            CurrTable = "Client";
         }
 
 
@@ -49,7 +49,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "product";
+            CurrTable = "Product";
         }
 
         private void selectActivationService_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "as";
+            CurrTable = "ActivationService";
 
         }
 
@@ -74,7 +74,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "ds";
+            CurrTable = "DeliveryService";
         }
 
         private void selectDelivery_Click(object sender, EventArgs e)
@@ -86,7 +86,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "delivery";
+            CurrTable = "Delivery";
         }
 
         private void selectOrder_Click(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "order";
+            CurrTable = "[Order]";
         }
 
         private void selectOrderDetails_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "od";
+            CurrTable = "OrderDetails";
         }
 
         private void selectSupplier_Click(object sender, EventArgs e)
@@ -122,26 +122,73 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            CurrTable = "supplier";
+            CurrTable = "Supplier";
         }
 
         private void addClient_Click(object sender, EventArgs e)
         {
-            Classes.QueryPatterns queryPatterns;
-            queryPatterns = new Classes.QueryPatterns();
-            queryPatterns.insertClient();
+            insertClientForm insertClientForm;
+            insertClientForm = new insertClientForm();
+            insertClientForm.Show();
+
         }
 
         private void deleteClient_Click(object sender, EventArgs e)
         {
-            Classes.QueryPatterns queryPatterns;
-            queryPatterns = new Classes.QueryPatterns();
-            queryPatterns.deleteClient();
+            connection = new Classes.Connection();
+            connection.OpenCon();
+            string idClient = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            string deleteClient = $"delete from Client where id_Client = {idClient}";
+            SqlCommand command2 = new SqlCommand(deleteClient);
+            command2.Connection = connection.GetCon();
+            command2.ExecuteNonQuery();
         }
 
         private void updateClient_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(dataGridView1.CurrentRow.Cells[0].Value.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+        }
+
+        private void updateGridView_Click(object sender, EventArgs e)
+        {
+            connection = new Classes.Connection();
+            connection.OpenCon();
+            string refreshClient = $"Select * from {CurrTable}";
+            SqlCommand command1 = new SqlCommand(refreshClient);
+            command1.Connection = connection.GetCon();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(command1);
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            dataGridView1.DataSource = table;
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            if (id_textbox.Text.Length == 0)
+            {
+                connection = new Classes.Connection();
+                connection.OpenCon();
+                string searchQuery = $"Select * from Client";
+                SqlCommand command1 = new SqlCommand(searchQuery);
+                command1.Connection = connection.GetCon();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command1);
+                DataTable table = new DataTable();
+                dataAdapter.Fill(table);
+                dataGridView1.DataSource = table;
+            }
+            else
+            {
+                connection = new Classes.Connection();
+                connection.OpenCon();
+                string searchQuery = $"Select * from Client where id_Client = {id_textbox.Text}";
+                SqlCommand command1 = new SqlCommand(searchQuery);
+                command1.Connection = connection.GetCon();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command1);
+                DataTable table = new DataTable();
+                dataAdapter.Fill(table);
+                dataGridView1.DataSource = table;
+            }
+            
         }
     }
 }

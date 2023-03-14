@@ -51,13 +51,11 @@
             selectOrderDetails = new System.Windows.Forms.ToolStripMenuItem();
             toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             selectSupplier = new System.Windows.Forms.ToolStripMenuItem();
-            changeTable = new System.Windows.Forms.ToolStripSplitButton();
-            обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            delete = new System.Windows.Forms.ToolStripMenuItem();
-            найтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            изменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            updateGridView = new System.Windows.Forms.ToolStripButton();
+            searchButton = new System.Windows.Forms.ToolStripButton();
             dataGridView1 = new System.Windows.Forms.DataGridView();
+            id_textbox = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -72,7 +70,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectTable, changeTable });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { selectTable, updateGridView, searchButton });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -99,28 +97,28 @@
             // selectClient
             // 
             selectClient.Name = "selectClient";
-            selectClient.Size = new System.Drawing.Size(180, 22);
+            selectClient.Size = new System.Drawing.Size(141, 22);
             selectClient.Text = "Посмотреть";
             selectClient.Click += selectClient_Click;
             // 
             // addClient
             // 
             addClient.Name = "addClient";
-            addClient.Size = new System.Drawing.Size(180, 22);
+            addClient.Size = new System.Drawing.Size(141, 22);
             addClient.Text = "Добавить";
             addClient.Click += addClient_Click;
             // 
             // deleteClient
             // 
             deleteClient.Name = "deleteClient";
-            deleteClient.Size = new System.Drawing.Size(180, 22);
+            deleteClient.Size = new System.Drawing.Size(141, 22);
             deleteClient.Text = "Удалить";
             deleteClient.Click += deleteClient_Click;
             // 
             // updateClient
             // 
             updateClient.Name = "updateClient";
-            updateClient.Size = new System.Drawing.Size(180, 22);
+            updateClient.Size = new System.Drawing.Size(141, 22);
             updateClient.Text = "Изменить";
             updateClient.Click += updateClient_Click;
             // 
@@ -222,59 +220,59 @@
             selectSupplier.Text = "Посмотреть";
             selectSupplier.Click += selectSupplier_Click;
             // 
-            // changeTable
+            // updateGridView
             // 
-            changeTable.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            changeTable.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { обновитьToolStripMenuItem, добавитьToolStripMenuItem, delete, найтиToolStripMenuItem, изменитьToolStripMenuItem });
-            changeTable.ImageTransparentColor = System.Drawing.Color.Magenta;
-            changeTable.Name = "changeTable";
-            changeTable.Size = new System.Drawing.Size(101, 22);
-            changeTable.Text = "Манипуляции";
+            updateGridView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            updateGridView.Image = (System.Drawing.Image)resources.GetObject("updateGridView.Image");
+            updateGridView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            updateGridView.Name = "updateGridView";
+            updateGridView.Size = new System.Drawing.Size(113, 22);
+            updateGridView.Text = "Обновить таблицу";
+            updateGridView.Click += updateGridView_Click;
             // 
-            // обновитьToolStripMenuItem
+            // searchButton
             // 
-            обновитьToolStripMenuItem.Name = "обновитьToolStripMenuItem";
-            обновитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            обновитьToolStripMenuItem.Text = "Обновить";
-            // 
-            // добавитьToolStripMenuItem
-            // 
-            добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            добавитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            добавитьToolStripMenuItem.Text = "Добавить";
-            // 
-            // delete
-            // 
-            delete.Name = "delete";
-            delete.Size = new System.Drawing.Size(128, 22);
-            delete.Text = "Удалить";
-            // 
-            // найтиToolStripMenuItem
-            // 
-            найтиToolStripMenuItem.Name = "найтиToolStripMenuItem";
-            найтиToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            найтиToolStripMenuItem.Text = "Найти";
-            // 
-            // изменитьToolStripMenuItem
-            // 
-            изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            изменитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            изменитьToolStripMenuItem.Text = "Изменить";
+            searchButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            searchButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            searchButton.Image = (System.Drawing.Image)resources.GetObject("searchButton.Image");
+            searchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            searchButton.Name = "searchButton";
+            searchButton.Size = new System.Drawing.Size(46, 22);
+            searchButton.Text = "Поиск";
+            searchButton.Click += searchButton_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new System.Drawing.Point(12, 28);
+            dataGridView1.Location = new System.Drawing.Point(12, 64);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new System.Drawing.Size(776, 410);
+            dataGridView1.Size = new System.Drawing.Size(776, 374);
             dataGridView1.TabIndex = 3;
+            // 
+            // id_textbox
+            // 
+            id_textbox.Location = new System.Drawing.Point(756, 28);
+            id_textbox.Name = "id_textbox";
+            id_textbox.Size = new System.Drawing.Size(44, 23);
+            id_textbox.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(686, 31);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(64, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Введите ID";
             // 
             // MainAdminForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(id_textbox);
             Controls.Add(dataGridView1);
             Controls.Add(toolStrip1);
             Controls.Add(hellolabel);
@@ -310,14 +308,12 @@
         private System.Windows.Forms.ToolStripMenuItem selectOrder;
         private System.Windows.Forms.ToolStripMenuItem selectOrderDetails;
         private System.Windows.Forms.ToolStripMenuItem selectSupplier;
-        private System.Windows.Forms.ToolStripSplitButton changeTable;
-        private System.Windows.Forms.ToolStripMenuItem обновитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem delete;
-        private System.Windows.Forms.ToolStripMenuItem найтиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem изменитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addClient;
         private System.Windows.Forms.ToolStripMenuItem deleteClient;
         private System.Windows.Forms.ToolStripMenuItem updateClient;
+        private System.Windows.Forms.ToolStripButton updateGridView;
+        private System.Windows.Forms.ToolStripButton searchButton;
+        private System.Windows.Forms.TextBox id_textbox;
+        private System.Windows.Forms.Label label1;
     }
 }

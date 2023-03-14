@@ -20,6 +20,8 @@ namespace MyGameStore.Forms
 
         private void SignUpButton_Click(object sender, EventArgs e)
         {
+            connection = new Classes.Connection();
+            connection.OpenCon();
             var login = textBoxLogin.Text;
             var password = textBoxPassword.Text;
             var address = textBoxAddress.Text;
@@ -34,8 +36,7 @@ namespace MyGameStore.Forms
 
         private void insertClientForm_Load(object sender, EventArgs e)
         {
-            connection = new Classes.Connection();
-            connection.OpenCon();
+          
         }
     }
 }
