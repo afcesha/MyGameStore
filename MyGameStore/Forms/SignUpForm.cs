@@ -43,35 +43,43 @@ namespace MyGameStore.Forms
             }
             else
             {
-                if (Convert.ToDateTime(birth) < Convert.ToDateTime("01.01.1900") || (Convert.ToDateTime(birth) > DateTime.Now))
+                if (login == "admin")
                 {
-                    MessageBox.Show("Вы не могли родиться в это время", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("You can't sign up with this login", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    string usercheckquery = $"Select ClientLogin from Client where ClientLogin = '{login}'";
-                    SqlCommand command1 = new SqlCommand(usercheckquery);
-                    command1.Connection = connection.GetCon();
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(command1);
-                    DataTable table = new DataTable();
-                    dataAdapter.Fill(table);
-                    if (table.Rows.Count != 0)
+                    if (Convert.ToDateTime(birth) < Convert.ToDateTime("01.01.1900") || (Convert.ToDateTime(birth) > DateTime.Now))
                     {
-                        MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+                        MessageBox.Show("Вы не могли родиться в это время", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
-                        string signupquery = $"insert Client values ('{login}', '{password}','{address}','{phone}', '{birth}')";
-                        SqlCommand command2 = new SqlCommand(signupquery);
-                        command2.Connection = connection.GetCon();
-                        command2.ExecuteNonQuery();
-                        MessageBox.Show("Молодец", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Hide();
-                        SignInForm signInForm = new SignInForm();
-                        signInForm.Show();
+                        string usercheckquery = $"Select ClientLogin from Client where ClientLogin = '{login}'";
+                        SqlCommand command1 = new SqlCommand(usercheckquery);
+                        command1.Connection = connection.GetCon();
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(command1);
+                        DataTable table = new DataTable();
+                        dataAdapter.Fill(table);
+                        if (table.Rows.Count != 0)
+                        {
+                            MessageBox.Show("Такой пользователь уже существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        }
+                        else
+                        {
+                            string signupquery = $"insert Client values ('{login}', '{password}','{address}','{phone}', '{birth}')";
+                            SqlCommand command2 = new SqlCommand(signupquery);
+                            command2.Connection = connection.GetCon();
+                            command2.ExecuteNonQuery();
+                            MessageBox.Show("Молодец", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Hide();
+                            SignInForm signInForm = new SignInForm();
+                            signInForm.Show();
+                        }
                     }
                 }
+                
 
             }
             connection.CloseCon();

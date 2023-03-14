@@ -2,40 +2,36 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace MyGameStore.Forms
 {
-    public partial class SignInForm : Form
+    public partial class AdminLoginForm : Form
     {
+
         Classes.Connection connection;
-        public SignInForm()
+        public AdminLoginForm()
         {
             InitializeComponent();
         }
 
-        private void SignInForm_Load(object sender, EventArgs e)
+        private void AdminLoginForm_Load(object sender, EventArgs e)
         {
             connection = new Classes.Connection();
-            textBoxLogin.MaxLength = 25;
-            textBoxPassword.MaxLength = 25;
-            textBoxPassword.PasswordChar = '*';
+            textBoxLoginAdm.MaxLength = 25;
+            textBoxPasswordAdm.MaxLength = 25;
+            textBoxPasswordAdm.PasswordChar = '*';
         }
 
-        private void SignInButton_Click(object sender, EventArgs e)
+        private void AdminLoginButton_Click(object sender, EventArgs e)
         {
-            var login = textBoxLogin.Text;
-            var password = textBoxPassword.Text;
-
+            var login = textBoxLoginAdm.Text;
+            var password = textBoxPasswordAdm.Text;
 
             if (login == "admin")
-            {
-                MessageBox.Show("You can't sign in with this login", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
             {
                 connection.OpenCon();
                 string signinquery = $"Select ClientLogin, ClientPassword from Client where ClientLogin = '{login}' and ClientPassword = '{password}'";
@@ -48,17 +44,20 @@ namespace MyGameStore.Forms
                 if (table.Rows.Count == 1)
                 {
                     MessageBox.Show("Молодец", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MainForm mainForm = new MainForm();
+                    MainAdminForm mainAdminForm = new MainAdminForm();
                     this.Hide();
-                    mainForm.hellolabel.Text = "Добро пожаловать, " + table.Rows[0][0];
-                    mainForm.ShowDialog();
+                    mainAdminForm.hellolabel.Text = "Добро пожаловать, " + table.Rows[0][0];
+                    mainAdminForm.ShowDialog();
 
                 }
                 else
-                    MessageBox.Show("Данные введены неправильно или такого пользователя не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Данные введены неправильно", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 connection.CloseCon();
             }
-            
+            else
+            {
+                MessageBox.Show("Ты не админ, пошел в жопу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

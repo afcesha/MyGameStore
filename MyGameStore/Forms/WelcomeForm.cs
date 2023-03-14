@@ -34,5 +34,12 @@ namespace MyGameStore.Forms
             SignUpForm signUpForm = new SignUpForm();
             signUpForm.ShowDialog();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+            AdminLoginForm adminLoginForm = new AdminLoginForm();
+            adminLoginForm.ShowDialog();
+        }
     }
 }
