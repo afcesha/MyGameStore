@@ -143,10 +143,13 @@ namespace MyGameStore.Forms
             command2.Connection = connection.GetCon();
             command2.ExecuteNonQuery();
         }
-
+        public string id;
         private void updateClient_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            updateClientForm updateClientForm = new updateClientForm();
+            updateClientForm.Show();
+            
         }
 
         private void updateGridView_Click(object sender, EventArgs e)
@@ -160,6 +163,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
+            dataGridView1.ReadOnly = false;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
