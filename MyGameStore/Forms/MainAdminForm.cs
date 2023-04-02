@@ -163,7 +163,7 @@ namespace MyGameStore.Forms
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
             dataGridView1.DataSource = table;
-            dataGridView1.ReadOnly = false;
+            
         }
 
         private void searchButton_Click(object sender, EventArgs e)
